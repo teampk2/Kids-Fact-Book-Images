@@ -11,14 +11,4 @@ Currently, all headings throughout the book use the same color. Update the logic
 * Preserve the existing font, size, alignment, spacing, and layout—only change the heading color.
 * Apply the theme colors uniformly to all current books and automatically to all future books.
 
-2). **Update "Think about it" Text Style**
-
-Currently, all **"Think about it"** text inside the fact boxes is displayed in **italic**. Update the styling so that **"Think about it"** is displayed in a **normal (regular) font style** instead.
-
-### Requirements
-
-* Change the font style from **italic** to **normal/regular (not bold)**.
-* Preserve the existing font family, font size, font weight, color, alignment, spacing, and position.
-* Only change the font style; no other formatting or layout should be modified.
-* Apply this change consistently to every fact box in the current book and all future books.
 
