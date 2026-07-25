@@ -1,0 +1,13 @@
+Fix SVG Mapping on the "TABLE OF CONTENTS" Page
+
+The previously implemented logic for displaying the SVG transparent icons on the TABLE OF CONTENTS page is not working correctly. The SVG files are not being embedded or mapped properly.
+
+Required Fix
+Write the mapping logic so that every TABLE OF CONTENTS heading automatically loads and embeds its corresponding SVG transparent icon.
+Match each heading with its SVG using the exact filename, ID, or category mapping.
+Ensure every SVG is correctly loaded, rendered, and embedded in both the live preview and the generated PDF.
+Do not display missing icons, broken image placeholders, or fallback graphics. If an SVG cannot be found, log the error and continue rendering the remaining icons.
+Preserve each SVG as a true vector with its original transparency, sharp edges, proportions, and quality. Do not rasterize, blur, compress, or distort the SVG.
+Maintain consistent icon size, alignment, spacing, and positioning for all Table of Contents entries.
+Whenever an SVG file is updated or replaced with the same filename or path, automatically use the latest version instead of a cached copy.
+Apply this mapping logic to the current book and all future books so that SVG icons are always embedded correctly without requiring additional code changes.
