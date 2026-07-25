@@ -1,0 +1,57 @@
+**Add a New "General Colors" Category in the Batch Preset Renderer**
+
+In the **SVG Recolor → Batch Preset Renderer** section, keep the existing preset categories exactly as they are and add a new category named **General Colors**.
+
+### Requirements
+
+* Do **not** modify or remove the existing categories.
+* Add a new category called **General Colors** alongside the current categories.
+* This category should contain standard solid vector colors commonly used in illustrations, icons, logos, and clipart.
+
+Include common colors such as:
+
+* Red
+* Dark Red
+* Orange
+* Yellow
+* Gold
+* Green
+* Dark Green
+* Light Green
+* Blue
+* Dark Blue
+* Light Blue
+* Cyan
+* Purple
+* Violet
+* Pink
+* Brown
+* Beige
+* Gray
+* Dark Gray
+* Black
+* White
+* Silver
+* Navy
+* Teal
+* Olive
+* Maroon
+* Lime
+* Aqua
+* Coral
+* Peach
+* Cream
+* Sky Blue
+* Indigo
+* Turquoise
+* Magenta
+
+### Functionality
+
+* Each color should be available as a one-click preset.
+* Applying a preset should recolor the uploaded SVG using that solid color while preserving the original SVG's fill, stroke, transparency, paths, proportions, and quality.
+* The **General Colors** category must work in both:
+
+  * **Single Preset Recolor**
+  * **Batch Preset Renderer**
+* The category should support preview, individual downloads, batch processing, and all export formats exactly like the existing preset categories.
