@@ -17,7 +17,7 @@ Currently, all **"Think about it"** text inside the fact boxes is displayed in *
 
 ### Requirements
 
-* Change the font style from **italic** to **normal/regular**.
+* Change the font style from **italic** to **normal/regular (not bold)**.
 * Preserve the existing font family, font size, font weight, color, alignment, spacing, and position.
 * Only change the font style; no other formatting or layout should be modified.
 * Apply this change consistently to every fact box in the current book and all future books.
