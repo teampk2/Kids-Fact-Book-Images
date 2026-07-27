@@ -1,0 +1,18 @@
+## Batch Preset Renderer – Apply Single Preset Recolor Logic for Remove Background and Size & Orientation
+
+### Required Implementation
+
+In the **Batch Preset Renderer** section, the existing **Remove Background** and **Size & Orientation** features from the **Single Preset Recolor** section must work with the same logic and behavior.
+
+### Requirements
+
+* Reuse the existing, working logic of **Remove Background** in the Batch Preset Renderer.
+* Reuse the existing, working logic of **Size & Orientation** in the Batch Preset Renderer.
+* Ensure both options behave exactly the same way in Batch Preset Renderer as they do in Single Preset Recolor.
+* Preserve all current functionality, settings, preview behavior, and export output.
+* Do not create a separate or different implementation for Batch Preset Renderer.
+* Use a shared code path so both sections stay synchronized now and in the future.
+
+### Expected Result
+
+When the user uses **Batch Preset Renderer**, the **Remove Background** and **Size & Orientation** options should work perfectly and identically to the **Single Preset Recolor** section, with the same preview, same processing, and same export results.
