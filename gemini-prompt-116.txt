@@ -1,0 +1,96 @@
+### KDP Cover Creator – Fix Logic for 8.25 × 11 Inch Hardcover (Not Resolved)
+
+The issue is **still not resolved**. The **8.25 × 11 inch Hardcover** option in the **Simulate Trim Size** section of the **KDP Cover Creator** is still generating an incorrect cover size. When the generated PDF is uploaded to Amazon KDP, the Print Previewer reports a **cover size mismatch**.
+
+From the attached screenshot:
+
+* **Expected Cover Size:** **18.800 × 12.417 inches**
+* **Generated Cover Size:** **18.665 × 12.417 inches**
+
+The **height is correct**, but the **total cover width is incorrect**, which indicates that the Hardcover width calculation is still wrong.
+
+### Required Fix
+
+Do **not** use a shared calculation for Paperback and Hardcover. Hardcover covers must be generated using a completely separate calculation engine because their dimensions depend on additional KDP-specific parameters.
+
+The Hardcover cover generator must dynamically calculate the cover dimensions based on:
+
+* Trim Size (8.25 × 11 inches)
+* Page Count
+* Interior Type (Black & White / Color)
+* Paper Type
+* Reading Direction
+* Binding Type
+* Spine Width
+* Wrap Width
+* Hinge Width
+* Bleed
+* Safe Area
+* Barcode Area
+
+Every measurement must be recalculated specifically for Hardcover instead of reusing Paperback logic.
+
+### Create Separate Calculation Modules
+
+Implement two completely independent calculation systems:
+
+* **Paperback Cover Generator**
+* **Hardcover Cover Generator**
+
+Each module must have its own formulas and layout logic.
+
+The Hardcover generator must independently calculate:
+
+* Full Cover Width
+* Full Cover Height
+* Front Cover Width
+* Back Cover Width
+* Spine Width
+* Wrap Width
+* Hinge Width
+* Bleed
+* Safe Margins
+* Spine Safe Area
+* Barcode Safe Area
+
+### Dynamic Dimension Calculation
+
+Never use fixed or cached values.
+
+Whenever the user changes any of the following:
+
+* Trim Size
+* Page Count
+* Paper Type
+* Interior Type
+* Reading Direction
+* Binding Type
+
+the application must immediately recalculate every Hardcover dimension before rendering or exporting the cover.
+
+### Export Validation
+
+Before exporting the PDF or PNG, validate that:
+
+* Calculated canvas width exactly matches the official KDP template.
+* Calculated canvas height exactly matches the official KDP template.
+* Spine width is correct for the selected page count and paper type.
+* Wrap and hinge widths are correctly included.
+* Bleed and safe areas are correctly positioned.
+* Front, spine, and back cover align perfectly.
+
+If any measurement differs from the official KDP specification—even by a fraction of an inch or a few pixels—the export must be blocked and the incorrect value identified.
+
+### KDP Compatibility Requirement
+
+The exported Hardcover cover must exactly match the official KDP Hardcover template so that it uploads without any errors, including:
+
+* Cover size mismatch
+* Incorrect overall width
+* Incorrect spine width
+* Incorrect wrap or hinge width
+* Bleed errors
+* Safe area violations
+* Barcode placement issues
+
+The final goal is for every **8.25 × 11 inch Hardcover** cover to match the official KDP template exactly and pass the Amazon KDP Print Previewer on the first upload without any cover-size validation errors.
