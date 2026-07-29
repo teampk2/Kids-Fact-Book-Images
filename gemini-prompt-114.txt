@@ -1,0 +1,34 @@
+The **8.25 × 11 inch** trim size option in the **KDP Cover Creator → Simulate Trim Size** section is not generating a valid cover template. When the generated cover PDF is uploaded to **Amazon KDP**, it reports that the cover dimensions are incorrect.
+
+Review and fix the entire cover generation logic so that the **8.25 × 11 inch** trim size fully complies with the latest **Amazon KDP Cover Calculator** specifications (as shown in the attached reference).
+
+### Requirements
+
+* Recalculate all cover dimensions dynamically based on the selected book specifications, including:
+
+  * Binding Type (Paperback / Hardcover)
+  * Interior Type (Black & White / Color)
+  * Paper Type
+  * Reading Direction
+  * Trim Size (8.25 × 11 inches)
+  * Page Count
+* Generate the correct KDP cover template using the calculated values for:
+
+  * Full Cover Width
+  * Full Cover Height
+  * Front Cover
+  * Back Cover
+  * Bleed
+  * Safe Area
+  * Spine Width
+  * Spine Safe Area
+  * Spine Margin
+  * Wrap (for Hardcover)
+  * Hinge (for Hardcover)
+  * Barcode Safe Area
+* Ensure the preview canvas matches the generated PDF exactly, with no scaling or positioning differences.
+* Position all cover elements (backgrounds, images, titles, spine text, logos, barcode area, and decorative elements) within the appropriate safe areas.
+* Generate a **300 DPI**, print-ready PDF with no clipping, stretching, distortion, or incorrect scaling.
+* Validate the generated cover dimensions before export to ensure they match the latest **Amazon KDP Cover Calculator** requirements for the selected book specifications.
+* The exported PDF should upload to Amazon KDP successfully without any **incorrect cover size**, **template mismatch**, or **dimension validation** errors.
+* Apply the same validation logic consistently to both **Paperback** and **Hardcover** cover generation so all supported trim sizes remain fully compliant with Amazon KDP standards.
