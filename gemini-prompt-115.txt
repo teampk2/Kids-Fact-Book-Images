@@ -1,0 +1,163 @@
+The KDP Cover Creator must generate **100% KDP-compliant covers** for both **Paperback** and **Hardcover**, with special attention to the **8.25 × 11 inch Hardcover** format. The generated cover must match Amazon KDP's official cover template exactly so that it passes the KDP Print Previewer without any cover size, bleed, spine, or margin errors.
+
+### Required Cover Types
+
+Support both cover formats:
+
+1. Paperback
+2. Hardcover
+
+Each cover type must use its own official KDP specifications. Do **not** use Paperback measurements for Hardcover or vice versa.
+
+---
+
+### Mandatory 8.25 × 11 inch Hardcover Support
+
+The **8.25 × 11 inch Hardcover** trim size is mandatory and must be fully supported.
+
+When the user selects:
+
+* Binding Type → Hardcover
+* Trim Size → **8.25 × 11 inches**
+* Paper Type
+* Interior Type
+* Reading Direction
+* Page Count
+
+the application must automatically calculate the cover using the official Amazon KDP hardcover specifications.
+
+---
+
+### Dynamic KDP Dimension Calculation
+
+Never use hardcoded cover dimensions.
+
+The application must dynamically calculate:
+
+* Full Cover Width
+* Full Cover Height
+* Front Cover
+* Back Cover
+* Spine Width
+* Spine Safe Area
+* Spine Margin
+* Wrap
+* Hinge
+* Bleed
+* Safe Area
+* Barcode Safe Area
+* Trim Area
+
+using the selected:
+
+* Binding Type
+* Trim Size
+* Paper Type
+* Interior Type
+* Page Count
+
+Every value must match the official KDP template for that exact book configuration.
+
+---
+
+### Hardcover Layout Requirements
+
+For Hardcover covers, generate all required KDP areas correctly:
+
+* Back Cover
+* Wrap Area
+* Hinge Area
+* Spine
+* Spine Safe Area
+* Spine Margins
+* Front Cover
+* Bleed Area
+* Safe Margin
+* Barcode Safe Area
+
+Nothing should overlap or extend into restricted areas.
+
+---
+
+### Paperback Layout Requirements
+
+For Paperback covers, generate:
+
+* Front Cover
+* Back Cover
+* Spine
+* Bleed
+* Safe Area
+* Barcode Area
+
+using the official KDP paperback specifications.
+
+---
+
+### Exact Output Size
+
+The exported PDF and PNG must exactly match the calculated KDP cover dimensions.
+
+There must be:
+
+* No extra pixels
+* No missing pixels
+* No scaling
+* No cropping
+* No stretching
+* No incorrect canvas size
+
+The final exported file dimensions must be identical to the official KDP template.
+
+---
+
+### PDF Export Requirements
+
+Export print-ready PDFs with:
+
+* Embedded fonts
+* 300 DPI resolution
+* Correct bleed
+* Correct trim size
+* Proper spine positioning
+* Accurate barcode exclusion zone
+* CMYK (or KDP-compatible print settings)
+* No scaling during export
+
+---
+
+### Built-in Validation
+
+Before allowing export, automatically validate:
+
+* Cover Width
+* Cover Height
+* Spine Width
+* Bleed
+* Safe Area
+* Wrap
+* Hinge
+* Barcode Margin
+* Spine Safe Area
+* Spine Alignment
+* Front Cover Position
+* Back Cover Position
+
+If any value differs from the official KDP specifications, block the export and display the exact issue.
+
+---
+
+### KDP Compatibility Goal
+
+The generated cover should upload directly to Amazon KDP without producing errors such as:
+
+* Expected cover size does not match submitted file size.
+* Incorrect cover dimensions.
+* Incorrect spine width.
+* Incorrect bleed.
+* Incorrect wrap or hinge measurements.
+* Barcode area violations.
+* Safe area violations.
+* Trim size mismatch.
+
+The objective is for every generated **Paperback** and **Hardcover** cover—including the mandatory **8.25 × 11 inch Hardcover** format—to pass the KDP Print Previewer successfully on the first upload with no cover-related validation errors.
