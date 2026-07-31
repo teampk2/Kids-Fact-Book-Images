@@ -1,0 +1,59 @@
+ Fix 8.25" × 11" Hardcover Cover Generator Dimensions
+
+The **8.25" × 11" Hardcover Cover Generator** is currently generating incorrect cover dimensions. Although the UI correctly displays the official KDP dimensions, the generated cover PDF does **not** use those values, causing KDP validation failures during upload.
+
+Implement the following logic:
+
+* The **Black & White Hardcover Creator** must always generate the final cover using the calculated full cover size shown in the tool:
+
+  * **Full Cover Size:** **18.800" × 12.417"** (for the current default configuration of 238 pages).
+* The **Color Hardcover Creator** must always generate the final cover using:
+
+  * **Full Cover Size:** **18.822" × 12.417"** (for the current default configuration of 238 pages).
+
+### Required Logic
+
+* The PDF canvas size must **exactly match** the calculated **Full Cover Width × Full Cover Height** displayed in the tool.
+* Do **not** use hardcoded canvas dimensions or apply any scaling after generation.
+* Position the **back cover, spine, hinge, and front cover** using the calculated measurements only.
+* Ensure the **wrap, bleed, trim, safety margins, hinge width, spine width, spine safe area, spine margins, and barcode area** all match the calculated values.
+* The preview, exported PNG, and exported PDF must all use the **same calculated dimensions** without any resizing or distortion.
+* The dimensions shown in the UI and the dimensions used for rendering/exporting must always be identical.
+
+### Dynamic Calculation
+
+Whenever the user changes:
+
+* Page Count
+* Interior Type
+* Paper Type
+* Trim Size
+* Binding Type
+
+the generator must automatically recalculate:
+
+* Full Cover Width
+* Full Cover Height
+* Front Cover
+* Back Cover
+* Spine Width
+* Spine Safe Area
+* Wrap
+* Hinge
+* Bleed
+* Safety Margins
+* Barcode Safe Area
+
+and immediately regenerate the cover layout using the updated values.
+
+### Validation Before Export
+
+Before creating the final PDF or PNG:
+
+* Verify that the generated canvas size exactly matches the calculated **Full Cover Width × Full Cover Height**.
+* Verify that the front cover, spine, hinge, and back cover align perfectly with the calculated layout.
+* Reject or regenerate the export if any calculated dimension differs from the values displayed in the tool.
+
+### Expected Result
+
+The **8.25" × 11" Black & White Hardcover Creator** and **8.25" × 11" Color Hardcover Creator** must generate covers that exactly match the official KDP dimensions shown in the tool (including **18.800" × 12.417"** for Black & White and **18.822" × 12.417"** for Color with the current default settings). The exported files should upload to Amazon KDP without any cover size, spine, bleed, or template validation errors.
