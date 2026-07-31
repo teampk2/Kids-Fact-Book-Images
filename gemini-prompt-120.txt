@@ -1,4 +1,4 @@
- Fix 8.25" × 11" Hardcover Cover Generator Dimensions
+In the Popular Interiors section, update both hardcover generators to follow the official KDP specifications exactly. The 8.25" × 11" Black & White Hardcover Creator and 8.25" × 11" Color Hardcover Creator must be handled independently because their spine widths and overall cover dimensions differ.
 
 The **8.25" × 11" Hardcover Cover Generator** is currently generating incorrect cover dimensions. Although the UI correctly displays the official KDP dimensions, the generated cover PDF does **not** use those values, causing KDP validation failures during upload.
 
