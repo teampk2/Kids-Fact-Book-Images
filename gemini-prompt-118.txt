@@ -1,3 +1,0 @@
-in the "Popular Interiors" Section add another two duplicate 8.25 X 11 inches cards, already in cover creator section And ensure that all remaining settings and options are kept exactly as they are, without any changes or modifications.” Be fully clickable and redirect to the duplicated tool pages (not the original ones), and set the names as one is "Black and White Hard Cover" and another "Color Hard Cover". Clicking on these new cards must:
-
-Open the duplicated tool pages correctly Maintain the same performance and behavior as original pages Ensure proper routing so there is no conflict between original and duplicated pages. After those duplicate tool pages are created, what should those tools work for separately, the tools should work independently of the other ones.
