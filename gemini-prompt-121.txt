@@ -1,0 +1,79 @@
+## Fact Box Color Theme Logic (Apply to All Fact Box Pages)
+
+### Required Implementation
+
+Apply the following color logic consistently across **all Fact Box pages** in the book (all 1,000 Fact Boxes).
+
+### Unique Color Logic for Every Page
+
+Each Fact Box on a page must have its **own unique solid color**.
+
+Requirements:
+
+* Every Fact Box on the same page must use a **different color**.
+* **No color may be repeated within the same page.**
+* Each Fact Box must have a unique background color that is clearly distinguishable from the others.
+* Colors may be reused on different pages if necessary, but **never within the same page**.
+* The color assignment should be automatic and applied consistently throughout the entire book.
+
+### Color Palette Requirements
+
+Use a high-quality collection of **solid colors only**.
+
+Requirements:
+
+* Do **not** use gradients.
+* Do **not** use color blends.
+* Do **not** use multi-color backgrounds.
+* Do **not** use patterns or textures.
+
+Instead, use clean, solid colors that are:
+
+* Bright
+* Vibrant
+* Child-friendly
+* Visually balanced
+* Harmonious with the overall book design
+* Rich without being overly saturated
+* Suitable for professional Amazon KDP printing
+
+Each Fact Box should have a single solid background color that complements the overall page while remaining unique.
+
+### Text Readability
+
+Readability is the highest priority.
+
+For every Fact Box:
+
+* Automatically select the text color that provides the highest contrast against the background.
+* Ensure all titles, fact text, icons, labels, numbers, and other content remain crisp, clear, and easy to read.
+* Never allow text to blend into the background.
+* Maintain excellent accessibility through strong contrast ratios.
+* Preserve sharp text rendering with no blur, fading, or color bleeding.
+
+### Automatic Contrast Logic
+
+The rendering logic must automatically determine the most readable text color based on the background color of each Fact Box.
+
+Examples:
+
+* Light background → Dark text
+* Dark background → White or very light text
+* Medium-tone background → Automatically choose the text color that provides the highest readability
+
+This decision should be made independently for every Fact Box.
+
+### Consistency
+
+Apply this logic to **every Fact Box page** throughout the entire book.
+
+Ensure:
+
+* Every Fact Box on a page has a unique solid color.
+* No duplicate colors appear on the same page.
+* Only solid colors are used throughout the book.
+* The color distribution is visually balanced.
+* The design remains consistent across all pages.
+* The final output is professional, colorful, engaging, print-ready, and fully optimized for Amazon KDP.
+
+The final result should be a visually appealing children's book in which every Fact Box stands out with its own unique solid color while maintaining excellent readability, a consistent design style, and a premium print-ready appearance.
