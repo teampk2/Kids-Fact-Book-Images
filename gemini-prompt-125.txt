@@ -1,0 +1,56 @@
+## Required Updates
+
+### 1. First Page Typography
+
+On the **first page of the book**, update the text colors as follows:
+
+* Make the **main title/heading** **black**.
+* Change **all remaining text** on the page (subtitles, descriptions, and other text) to appropriate **colored text** that complements the overall book theme.
+* Use colors that are attractive, child-friendly, and easy to read.
+* Maintain excellent contrast and readability.
+* Do not change the page layout, typography, spacing, or design—only update the text colors.
+* Ensure the first page has a polished, premium, and visually appealing appearance.
+
+---
+
+### 2. Fact Box Color Logic (Apply to All 1,000 Fact Boxes)
+
+The current implementation has an issue where **adjacent Fact Boxes on the same page sometimes receive the same background color**. This must be corrected.
+
+#### Required Implementation
+
+Apply the following logic to **every Fact Box page** throughout the book:
+
+* Every Fact Box on the same page must have its **own unique solid background color**.
+* **No two Fact Boxes on the same page may use the same background color.**
+* If one Fact Box uses a particular color, that color **must not be assigned to any other Fact Box on that page**.
+* The color assignment should be **randomized for each page**, so every page has a different color arrangement.
+* Avoid repeating the same color sequence or pattern across multiple pages.
+* Apply this logic consistently to **all 1,000 Fact Boxes** in the book.
+
+### Color Requirements
+
+* Use **solid colors only**.
+* Do **not** use gradients.
+* Do **not** use white or near-white background colors.
+* Use light and medium-tone colors that are:
+
+  * Child-friendly
+  * Visually balanced
+  * Easy on the eyes
+  * Suitable for professional Amazon KDP printing
+
+### Text Readability
+
+For every Fact Box:
+
+* Automatically select the text color that provides the highest contrast with the background.
+* Ensure all titles, fact text, icons, labels, and numbers remain crisp, clear, and easy to read.
+* Maintain excellent readability regardless of the selected background color.
+
+### Expected Result
+
+* The first page should have a professional appearance with a **black title** and **appropriately colored supporting text**.
+* Every Fact Box page should display **unique, non-repeating background colors** for all Fact Boxes on that page.
+* Adjacent Fact Boxes should **never share the same background color**.
+* The final book should have a clean, colorful, consistent, and print-ready design optimized for Amazon KDP.
