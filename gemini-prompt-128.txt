@@ -1,0 +1,18 @@
+For the following pages, apply a **unique, high-contrast text color** to **all exact text** on each page. Every page must use a **different text color**—**no color should be repeated** anywhere across these pages.
+
+The text color for each page must be carefully selected to **complement the page's background color and design**, ensuring **maximum readability, strong contrast, and excellent visual appeal**. Avoid colors that blend into the background or reduce legibility.
+
+**Requirements:**
+
+* Use a **different text color for every page** (no repeated colors).
+* Choose colors that provide **clear, comfortable reading** against each page's background.
+* Maintain a **bright, vibrant, premium children's book style**.
+* Ensure all headings and body text remain **sharp, crisp, and easy to read**.
+* Keep the color palette visually balanced, fun, and engaging while preserving a professional KDP-quality appearance.
+
+**Apply this rule to the following pages:**
+
+* **WELCOME TO THE WORLD OF WONDER!**
+* **HOW TO USE THIS BOOK**
+* **ULTIMATE AMAZING FACT CHAMPIONSHIP**
+* **LEVEL 1, LEVEL 2, LEVEL 3, LEVEL 4, and LEVEL 5 — FACT DETECTIVE QUIZ** (each level page must use its own unique text color, with no color repeated across any of these pages).
