@@ -1,0 +1,87 @@
+## Facts Book PDF – Correct Full Justification for All 1,000 Fact Boxes
+
+The previous instruction was not applied correctly. The text inside the Fact Boxes is **still not fully justified**. This must be fixed at the rendering/layout level.
+
+### Required Implementation
+
+Apply **true full-justified paragraph alignment** to the text inside **all 1,000 Fact Boxes across the entire book**.
+
+The justification must align the text evenly against **both the left and right edges** of the Fact Box text area.
+
+### Exact Requirements
+
+* Apply `text-align: justify` / equivalent **full-justification logic** to every Fact Box text paragraph.
+* Do **not** use left alignment, center alignment, or right alignment.
+* Ensure every applicable line is distributed correctly across the available text width.
+* The **final line of each paragraph should remain naturally left-aligned**, rather than being artificially stretched.
+* Apply the same justification logic consistently to all 1,000 Fact Boxes.
+* Do not rely only on the visual appearance or CSS property—ensure the **actual PDF rendering engine applies full justification** when generating the PDF.
+
+### Preserve Existing Design
+
+Do **not** change any existing design properties:
+
+* Preserve all existing font families.
+* Preserve all existing font sizes.
+* Preserve all existing text colors.
+* Preserve existing Fact Box colors.
+* Preserve existing Fact Box dimensions.
+* Preserve existing margins.
+* Preserve existing padding.
+* Preserve existing spacing.
+* Preserve existing borders and visual elements.
+* Preserve the existing Fact Box layout.
+
+Only correct the **text alignment and paragraph layout**.
+
+### Matching Line Height and Margins
+
+For every Fact Box:
+
+* Preserve the existing line-height factor unless adjustment is required for proper justification.
+* Maintain consistent line height throughout the entire book.
+* Respect the existing left and right text margins/padding.
+* Ensure justified text uses the **actual available text width** inside each Fact Box.
+* Prevent text from touching the Fact Box edges.
+* Maintain consistent top, bottom, left, and right spacing.
+
+### Text Quality
+
+After applying full justification:
+
+* Text must remain **clean and crisp**.
+* No overlapping words.
+* No excessive word spacing.
+* No distorted characters.
+* No text overflow.
+* No clipping.
+* No uneven paragraph positioning.
+* No accidental changes to font size.
+* No changes to the existing Fact Box visual design.
+
+### Important Rendering Rule
+
+The justification must be applied **before PDF export at the paragraph/text-layout stage**, not by manually inserting spaces or manipulating the text visually.
+
+Do **not** add extra spaces between words to simulate justification.
+
+The PDF generator must calculate the correct word spacing automatically so the text forms a clean, professional rectangular text block.
+
+### Final Validation
+
+Before exporting the final PDF, verify **all 1,000 Fact Boxes**:
+
+* ✅ Full justification is actually applied.
+* ✅ Text aligns with both left and right edges.
+* ✅ Final paragraph lines remain naturally left-aligned.
+* ✅ Consistent line height.
+* ✅ Existing margins and padding preserved.
+* ✅ Existing fonts and font sizes preserved.
+* ✅ Existing colors preserved.
+* ✅ No overflow or clipping.
+* ✅ No excessive word spacing.
+* ✅ No visual design changes.
+
+### Expected Result
+
+The final Facts Book PDF must have **true full-justified text inside every one of the 1,000 Fact Boxes**, creating clean, uniform text blocks aligned consistently along both the left and right edges while preserving the **entire existing typography, spacing, colors, margins, and Fact Box design**.
