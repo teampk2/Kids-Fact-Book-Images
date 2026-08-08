@@ -1,0 +1,18 @@
+### Facts Book PDF – Fact Box Text Alignment
+
+In the **Facts Book PDF**, make the text content inside **all 1,000 Fact Boxes** **fully justified**.
+
+### Required Implementation
+
+* Apply **Justify** alignment to all text inside every Fact Box.
+* Ensure the text aligns evenly with both the **left and right edges** of the text area.
+* Apply this consistently to all 1,000 Fact Boxes throughout the entire book.
+* Do not change the existing font, font size, text color, spacing, or Fact Box design.
+* Preserve proper line spacing and paragraph spacing.
+* Ensure words are distributed naturally without excessive or awkward spacing.
+* Keep the text clean, sharp, and highly readable.
+* Do not allow text to overflow, overlap, or extend outside the Fact Box.
+
+### Expected Result
+
+All text content within the **1,000 Fact Boxes** should use **professional full-justified alignment**, producing a clean, uniform, and polished appearance throughout the entire Facts Book PDF.
