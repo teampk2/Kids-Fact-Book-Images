@@ -1,4 +1,4 @@
-## MEGA Cloud Sync Hub – PDF Delete Button Not Working
+1.## MEGA Cloud Sync Hub – PDF Delete Button Not Working
 
 The previous deletion implementation is **still not working**.
 
@@ -60,3 +60,69 @@ The complete workflow must work reliably:
 After successful deletion, the PDF must **actually disappear from the connected MEGA.nz account** and from the **MEGA Cloud Sync Hub** list.
 
 **Please test the actual delete button end-to-end after implementing the fix. Do not consider the task complete until clicking the Trash icon produces a visible response and successfully removes the selected PDF.**
+
+
+
+2.## Full Book Manuscript PDF – Automatic File Naming Logic
+
+After generating the final book PDF, specifically the **Full Book Manuscript** in the Facts Book app, the generated PDF should be automatically connected to the **MEGA.nz** account through the **MEGA Cloud Sync Hub** and synced.
+
+### Required PDF File Naming Format
+
+From now on, **every newly generated Full Book Manuscript PDF** must automatically use the following file-naming format:
+
+**`[Volume Number]-[Book Title]-COLOR BOOK.pdf`**
+
+### Naming Order
+
+The filename must always contain these elements in this exact order:
+
+1. **Volume Number**
+2. **Hyphen (`-`)**
+3. **Book Title**
+4. **Hyphen (`-`)**
+5. **COLOR BOOK**
+6. **`.pdf` extension**
+
+### Example
+
+If:
+
+* Volume Number = `1`
+* Book Title = `THE BIG BOOK OF 1000 KIDS FACTS`
+
+The generated filename must be:
+
+**`1-THE BIG BOOK OF 1000 KIDS FACTS-COLOR BOOK.pdf`**
+
+### Important Requirements
+
+* Automatically obtain the correct **volume number** from the book's existing volume information.
+* Automatically obtain the **exact book title** from the current book/manuscript.
+* Always append **`-COLOR BOOK`** before the `.pdf` extension.
+* Use the same naming logic for **every newly generated Full Book Manuscript PDF**.
+* Do not use the old filename format.
+* Do not add unnecessary words, timestamps, random IDs, or duplicate extensions.
+* Preserve the exact volume number and book title.
+* Ensure the filename is used consistently when:
+
+  * Generating the PDF
+  * Downloading the PDF
+  * Saving the PDF
+  * Creating the sync record
+  * Uploading/syncing the PDF to MEGA.nz
+
+### MEGA Cloud Sync
+
+After the PDF is generated, the **MEGA Cloud Sync Hub** must use this exact filename when uploading/syncing the PDF to MEGA.nz.
+
+For example:
+
+**Local PDF:**
+`1-THE BIG BOOK OF 1000 KIDS FACTS-COLOR BOOK.pdf`
+
+**MEGA.nz synced file:**
+`1-THE BIG BOOK OF 1000 KIDS FACTS-COLOR BOOK.pdf`
+
+The filename must remain **exactly the same** in the local Facts Book app and on MEGA.nz.
+
