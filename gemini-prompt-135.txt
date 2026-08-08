@@ -1,0 +1,62 @@
+## MEGA Cloud Sync Hub – PDF Delete Button Not Working
+
+The previous deletion implementation is **still not working**.
+
+When the user clicks the **Recycle Bin / Trash icon** next to a previously synced PDF in the **MEGA Cloud Sync Hub**, **nothing happens**. The PDF remains in the list, and there is no visible response or deletion result.
+
+### Required Fix
+
+Please **debug and fix the complete delete workflow**, rather than only changing the UI.
+
+When the user clicks the **Trash/Delete icon**:
+
+1. The click event must trigger correctly.
+2. Identify the exact synced PDF associated with that record.
+3. Locate the corresponding PDF file in the connected **MEGA.nz** account.
+4. Send the correct MEGA deletion request for that exact file.
+5. Wait for the deletion operation to complete.
+6. Verify that MEGA confirms the file was successfully removed.
+7. Only after successful MEGA deletion, remove the corresponding local sync/library record.
+8. Refresh the list so the deleted PDF immediately disappears from the **MEGA Cloud Sync Hub**.
+
+### Important Debugging Requirements
+
+Check the entire deletion chain for failures, including:
+
+* Trash button click handler
+* PDF/file ID being stored with the sync record
+* MEGA node/file ID
+* MEGA authentication/session
+* Delete API/function call
+* Async/Promise handling
+* Error handling
+* UI state update
+* Local database/storage cleanup
+* Sync list refresh
+
+Do **not** silently swallow errors.
+
+If the deletion request fails, display the **actual error message** so the problem can be identified and fixed.
+
+### Prevent False Deletion
+
+Do **not** remove the PDF from the UI only.
+
+The PDF must actually be deleted from **MEGA.nz** first. Then the local record can be removed.
+
+If MEGA deletion fails:
+
+* Keep the PDF record visible.
+* Do not report “Deleted successfully.”
+* Show a clear error message.
+* Allow the user to try again.
+
+### Expected Result
+
+The complete workflow must work reliably:
+
+**Click Trash Icon → Identify PDF → Locate MEGA File → Delete from MEGA → Confirm Success → Remove Local Record → Refresh UI**
+
+After successful deletion, the PDF must **actually disappear from the connected MEGA.nz account** and from the **MEGA Cloud Sync Hub** list.
+
+**Please test the actual delete button end-to-end after implementing the fix. Do not consider the task complete until clicking the Trash icon produces a visible response and successfully removes the selected PDF.**
