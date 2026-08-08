@@ -1,0 +1,48 @@
+## Facts Book – “Think about it” Section Italic Formatting
+
+### Required Implementation
+
+In the Facts Book, apply **italic formatting to all text in the “Think about it” section** inside every Fact Box throughout the entire book.
+
+### Exact Formatting Requirements
+
+For every Fact Box:
+
+* The heading **“Think about it”** must be **italic**.
+* **“Think about it” must NOT be bold**.
+* The heading should use the **normal/regular italic font weight**.
+* All of the **content/text under “Think about it”** must also be **italic**.
+* The entire “Think about it” section—including its heading and content—must consistently use **regular italic formatting**.
+
+### Preserve Existing Design
+
+Do not change:
+
+* Font size
+* Font family
+* Text color
+* Fact Box color
+* Margins
+* Padding
+* Line height
+* Spacing
+* Alignment
+* Fact Box dimensions
+* Overall Fact Box design
+
+Only change the **font style of the “Think about it” section to regular italic**.
+
+### Important
+
+Do **not** use:
+
+* Bold italic
+* Bold
+* Underline
+* Extra font weight
+
+Use **regular italic only**.
+
+### Expected Result
+
+Every **“Think about it”** heading and its corresponding content in all Fact Boxes should appear in **clean, regular italic text**, with the heading **italic but not bold**, while all existing typography, colors, spacing, alignment, and Fact Box design remain unchanged.
