@@ -1,141 +1,309 @@
-## KDP PDF Publisher – Dynamic Page Border Safe-Margin Fix
+## KDP PDF Publisher – Automatic Safe-Margin and Page-Border Correction
 
 ### Problem to Fix
 
-In the **KDP PDF Publisher** section, when a PDF is generated from the script provided by the user in the **Full Book Manuscript** section and then uploaded to Amazon KDP, the **page border/frame is positioned too close to the trim edge and can extend beyond the recommended safe area**.
+In the **KDP PDF Publisher** section, the PDF generated from the user's **Full Book Manuscript** can contain a page border/frame that extends too close to, or beyond, the **KDP safe margin** when the PDF is uploaded to KDP.
 
-As shown in the attached screenshot, the Fact Box content itself may be acceptable, but the **outer page border/frame** needs to be moved slightly inward so it remains safely inside the KDP printable/safe area.
+The attached screenshot shows the type of page-frame layout that needs to be corrected.
 
-### Required Implementation
-
-Update the **KDP PDF Publisher** rendering logic so that the page border/frame is automatically positioned according to the selected **KDP trim size, bleed setting, and book configuration**.
-
-Do **not** use one fixed margin value for every book size.
-
-The application must dynamically calculate the correct safe position for the border/frame for **every supported KDP book size**.
+The PDF Publisher must automatically calculate and adjust the **page border/frame, Fact Box dimensions, and internal text-safe area** according to the selected KDP book size so that **no important element crosses the KDP safe area**.
 
 ---
 
-## Dynamic Safe-Margin Calculation
+# Required Implementation
 
-Before generating the final PDF:
+After the PDF is generated from the **Full Book Manuscript**, the **KDP PDF Publisher** must perform an automatic safe-margin calculation before producing the final upload-ready PDF.
 
-1. Detect the selected **trim size**.
-2. Detect whether the manuscript uses **bleed or no bleed**.
-3. Determine the applicable KDP safe/inner margin requirements for that book configuration.
-4. Calculate the available safe area.
-5. Position the outer page border/frame **inside that safe area**.
-6. Apply a small additional safety buffer so the border does not sit directly on the safe-margin boundary.
-7. Use the calculated position consistently across the entire book.
+### 1. Detect the Selected Book Size
+
+The logic must dynamically use the actual selected:
+
+* Trim width
+* Trim height
+* Page orientation
+* Bleed setting
+* Interior type, where applicable
+
+Do **not** use one fixed margin calculation for every book size.
+
+The safe-area calculation must be performed independently for **each supported KDP trim size**.
+
+---
+
+# 2. Automatically Calculate the Safe Area
+
+Create a dedicated safe-area calculation system:
+
+```text
+Page Size
+   ↓
+Trim Area
+   ↓
+Bleed Area (if applicable)
+   ↓
+KDP Safe Margin
+   ↓
+Safe Content Area
+   ↓
+Frame / Fact Box / Text Layout
+```
+
+All important content must remain inside the calculated safe content area.
 
 ### Important
 
-The border/frame must **never be positioned based on a fixed pixel value** because PDF dimensions, trim sizes, DPI, and rendering scales can differ.
+The system must account for:
 
-Calculate the border position using the document's **actual physical page dimensions** and convert the required margins into the PDF's coordinate system.
-
----
-
-## Border/Frame Requirements
-
-The existing page border/frame should be:
-
-* Moved slightly inward from its current position.
-* Completely contained within the calculated safe area.
-* Consistent on all four sides.
-* Properly aligned with the page.
-* Symmetrical and visually balanced.
-* Sharp and print-ready.
-* Preserved as a vector element where possible.
-
-Do **not** redesign the border.
-
-Do **not** change its:
-
-* Color
-* Thickness
-* Style
-* Shape
-* Overall appearance
-
-Only adjust its **position and dimensions** so it remains safely within the KDP-safe area.
-
----
-
-## Apply to All Supported Book Sizes
-
-The logic must work automatically for **all supported KDP trim sizes**, rather than being hard-coded for only the current book.
-
-For example, if the user changes from one trim size to another, the application must recalculate:
-
-**Trim Size → Bleed/No Bleed → Safe Margin → Safety Buffer → Border Position**
-
-The border should automatically resize/reposition according to the new page dimensions.
-
----
-
-## Do Not Affect Other Content
-
-The safe-margin correction should apply specifically to the **page border/frame**.
-
-Do not unintentionally move or resize:
-
+* Page border/frame
 * Fact Boxes
 * Text
-* Images
-* Illustrations
-* Page numbers
-* Headers
-* Footers
+* Headings
 * Icons
-* Tables
-* Other manuscript content
+* Images
+* Page numbers
+* Decorative elements
+* Any other non-bleed content
 
-Existing content positioning should remain unchanged unless it independently violates the applicable safe area.
+Nothing that must remain inside the safe area should cross the calculated boundary.
 
 ---
 
-## Validation Before PDF Export
+# 3. Automatically Reduce the Page Border/Frame
 
-Before the final PDF is generated, automatically validate every page.
+If the existing page border/frame is too close to the trim edge:
+
+* Automatically reduce its width/height.
+* Move it inward as necessary.
+* Maintain equal spacing from the relevant page edges.
+* Preserve the original frame design.
+* Do not distort the frame.
+* Do not allow the frame to extend outside the calculated safe area.
+
+The frame should be **scaled inward proportionally**, rather than simply being clipped.
+
+---
+
+# 4. Dynamically Adjust Fact Box Dimensions
+
+Because reducing the page frame may reduce the available content area, the Fact Box layout must also be recalculated.
+
+When necessary:
+
+* Reduce Fact Box width slightly.
+* Reduce Fact Box height slightly.
+* Recalculate internal padding.
+* Recalculate text width.
+* Recalculate available text height.
+* Reflow text naturally.
+* Maintain consistent spacing between Fact Boxes.
+
+### Important
+
+Do not simply crop the Fact Boxes.
+
+The entire Fact Box must remain inside the safe area.
+
+---
+
+# 5. Protect the Text Safe Margin
+
+The internal text must also have sufficient clearance from the Fact Box edges.
+
+When the Fact Box is resized:
+
+```text
+Fact Box outer boundary
+        ↓
+Internal padding
+        ↓
+Text safe area
+        ↓
+Text
+```
+
+The text must never touch or cross:
+
+* Fact Box borders
+* Page frame
+* Trim boundary
+* KDP unsafe region
+
+If the available text width becomes smaller, the text should **reflow naturally** rather than overflow.
+
+---
+
+# 6. Preserve Existing Design
+
+The correction should be as minimally invasive as possible.
+
+Preserve:
+
+* Existing Fact Box colors
+* Typography
+* Font sizes where possible
+* Font weights
+* Text colors
+* Icons
+* Border styles
+* Page composition
+* Overall visual design
+* Existing spacing hierarchy
+
+Only make the necessary geometric adjustments required to bring the content safely inside the KDP margins.
+
+---
+
+# 7. Use a Safety Buffer
+
+Do not position the frame or content exactly on the calculated safe-margin boundary.
+
+Create a small additional internal safety buffer so that minor rendering differences do not cause the content to cross the KDP safe area.
+
+Conceptually:
+
+```text
+Trim Edge
+│
+│   KDP Safety Margin
+│   │
+│   │   Additional Safety Buffer
+│   │   │
+│   │   │  PAGE FRAME
+│   │   │  ┌───────────────────────┐
+│   │   │  │                       │
+│   │   │  │      SAFE CONTENT     │
+│   │   │  │        AREA           │
+│   │   │  │                       │
+│   │   │  └───────────────────────┘
+│   │   │
+```
+
+The exact buffer should be calculated according to the selected trim size and KDP requirements rather than hard-coded as one universal value.
+
+---
+
+# 8. Automatic Preflight Validation
+
+Before the final PDF is exported, run an automatic validation for **every page**.
 
 Check:
 
-* ✅ Page dimensions match the selected KDP trim size.
-* ✅ Bleed settings are correctly applied when applicable.
-* ✅ Border/frame remains completely inside the calculated safe area.
-* ✅ Border does not cross the trim boundary.
-* ✅ Border does not enter the unsafe edge region.
-* ✅ Equal spacing is maintained on all four sides.
-* ✅ Border is not accidentally clipped.
-* ✅ Border remains sharp and print-ready.
-* ✅ The calculation works for every supported trim size.
-* ✅ The same logic is applied to every page of the manuscript.
+### Page Frame
 
-If the border is detected as too close to or outside the safe area, **automatically move it inward before exporting the PDF**.
+* Is the frame inside the safe area?
+* Does any part of the frame cross the safe boundary?
+
+### Fact Boxes
+
+* Are all Fact Boxes inside the safe area?
+* Does any Fact Box cross the safe boundary?
+
+### Text
+
+* Does any text extend outside its Fact Box?
+* Does any text cross the page safe margin?
+* Is any text clipped?
+
+### Other Elements
+
+* Are icons, images, headings, and page numbers safely positioned?
 
 ---
 
-## Important Rendering Rule
+# 9. Automatic Correction Loop
 
-Perform the safe-margin calculation using **physical PDF dimensions**, not screen pixels.
+If any element fails validation, automatically recalculate the layout.
 
-The calculation should remain accurate regardless of:
+For example:
 
-* Browser zoom
-* Display resolution
-* PDF viewer zoom
-* DPI used for preview
-* Screen size
+```text
+Generate PDF
+      ↓
+Calculate KDP Safe Area
+      ↓
+Check Frame
+      ↓
+Check Fact Boxes
+      ↓
+Check Text
+      ↓
+Check Images / Icons
+      ↓
+Any element outside safe area?
+      ↓
+   YES ──────────────┐
+      ↓              │
+Adjust dimensions    │
+      ↓              │
+Reflow content       │
+      ↓              │
+Validate again ──────┘
+      ↓
+   PASS
+      ↓
+Export Final KDP PDF
+```
 
-The generated PDF itself must contain the correctly positioned border.
+Do not export the final PDF until the validation passes.
+
+---
+
+# 10. Support All Book Sizes
+
+Do **not** hard-code the current screenshot's dimensions.
+
+The implementation must calculate the correct frame and content geometry for **every supported KDP trim size** selected by the user.
+
+For each size:
+
+```text
+selected trim size
+        +
+bleed configuration
+        +
+KDP safe-margin rules
+        ↓
+calculate usable content area
+        ↓
+calculate frame dimensions
+        ↓
+calculate Fact Box dimensions
+        ↓
+calculate text-safe area
+```
+
+This must happen automatically.
+
+---
+
+# 11. Important: Do Not Solve This by Simply Shrinking Everything
+
+The goal is **not** to blindly scale the entire page down.
+
+Instead, intelligently calculate:
+
+* Frame inset
+* Content width
+* Content height
+* Fact Box dimensions
+* Internal padding
+* Text area
+* Vertical spacing
+
+The final design should remain visually balanced while safely fitting inside the KDP requirements.
 
 ---
 
 ## Expected Result
 
-When a user generates a PDF in **Full Book Manuscript → KDP PDF Publisher** and uploads it to KDP, the page border/frame should remain **comfortably inside the appropriate KDP safe area** for the selected book configuration.
+When a user generates a PDF in **Full Book Manuscript** and sends it to **KDP PDF Publisher**, the system should automatically produce a KDP-safe version.
 
-The system should automatically calculate the correct border position for **each supported KDP trim size and bleed configuration**, eliminating the current problem where the frame extends too close to or beyond the safe margin.
+The final PDF must ensure:
 
-**Do not simply reduce the border by one fixed amount. Implement a dynamic, trim-size-aware safe-margin calculation with a small safety buffer and validate the final position before PDF export.**
+**Page frame → inside safe area**
+**Fact Boxes → inside safe area**
+**Text → inside Fact Box and safe area**
+**Images/icons → inside safe area unless intentionally designed to bleed**
+**No clipping → No overflow → No unsafe positioning**
+
+The system should **automatically calculate, resize, reposition, reflow, validate, and correct the layout for the selected KDP book size before exporting the final PDF**, so the uploaded KDP PDF does not produce the border/frame warning shown in the attached screenshot.
