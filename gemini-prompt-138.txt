@@ -1,0 +1,154 @@
+## SVG Recolor → Batch Preset Renderer – New Batch Grid Options
+
+Add **two new options** inside the:
+
+**SVG Recolor → Batch Preset Renderer**
+
+section.
+
+The purpose of these options is to allow users to upload multiple SVGs/images in batch and generate them as a clean **grid/collage layout**, with independent controls for the **grid background color** and **SVG element border color**.
+
+---
+
+# Option 1: Batch Upload → Grid/Collage with Background Color
+
+Add a new option that allows the user to:
+
+**Upload multiple images/SVGs in batch → Arrange them automatically into a grid/collage → Choose the grid background color.**
+
+### Required Functionality
+
+* Allow the user to upload multiple SVG/image files simultaneously.
+* Automatically arrange all uploaded files into a clean, evenly spaced **grid/collage**.
+* Maintain the original aspect ratio and proportions of every uploaded SVG/image.
+* Do not stretch, distort, crop, or otherwise modify the original artwork.
+* Use consistent spacing and alignment between all grid elements.
+* Apply the selected background color to the **entire collage/grid area**.
+
+### Grid Background Color
+
+Add a **Grid Background Color** selector.
+
+* Default color: **White (#FFFFFF)**.
+* Include the complete available color palette in the selector.
+* When the user selects a color, apply that exact solid color to the entire grid/collage background.
+* The selected color must be applied consistently across the complete output.
+* Do not use gradients, patterns, or textures.
+
+### Example
+
+**Uploaded SVGs → Grid Arrangement → White Background**
+
+If the user selects blue:
+
+**Uploaded SVGs → Grid Arrangement → Blue Background**
+
+---
+
+# Option 2: Batch Upload → Grid/Collage with SVG Element Borders
+
+Add a separate option that allows the user to:
+
+**Upload multiple SVGs/images in batch → Arrange them into a grid/collage → Apply a selectable border around every individual SVG/image element.**
+
+### Required Functionality
+
+* Allow multiple SVG/image files to be uploaded in batch.
+* Arrange all uploaded files automatically into a clean grid.
+* Preserve each original SVG/image exactly.
+* Add a border around **each individual SVG/image element or grid cell**.
+* Apply the border consistently to every element in the collage.
+* Maintain equal spacing and alignment between all grid elements.
+
+### Border Color
+
+Add an **Element Border Color** selector.
+
+* Include all available colors.
+* The color selected by the user must become the border color for **every individual SVG/image element** in the collage.
+* Example:
+
+  * Red selected → every element receives a red border.
+  * Blue selected → every element receives a blue border.
+* The border color must remain consistent throughout the entire grid.
+
+### Border Appearance
+
+The border must have:
+
+* Consistent thickness
+* Consistent spacing
+* Sharp, clean edges
+* No unwanted shadows
+* No gradients
+* No distortion
+* No overlap with the original artwork
+
+---
+
+# Keep Both Controls Independent
+
+The **Grid Background Color** and **Element Border Color** must be completely independent controls.
+
+For example:
+
+* **Grid Background Color:** Light Blue
+* **Element Border Color:** Dark Blue
+
+The user must be able to select different colors for each.
+
+Do not automatically synchronize these two colors.
+
+---
+
+# Correct UI Structure
+
+The options must be located specifically under:
+
+**SVG Recolor → Batch Preset Renderer**
+
+Within this section, provide the two batch-grid functions:
+
+### 1. Batch Grid / Collage – Background Color
+
+* Batch Upload
+* Grid Layout
+* Grid Background Color
+* Default: White
+* Full color selection
+
+### 2. Batch Grid / Collage – Element Border
+
+* Batch Upload
+* Grid Layout
+* Element Border Color
+* Full color selection
+* Apply selected border color to every SVG/image element
+
+---
+
+# Output Requirements
+
+The generated collage must:
+
+* Preserve all uploaded artwork.
+* Maintain original proportions.
+* Maintain consistent grid spacing.
+* Use the selected background color.
+* Apply the selected border color correctly when enabled.
+* Produce a clean, sharp, high-quality output.
+* Never crop, stretch, or distort the original artwork.
+* Never unintentionally recolor the original artwork.
+* Keep the background and border controls independent.
+
+### Expected Result
+
+Inside **SVG Recolor → Batch Preset Renderer**, the user should be able to upload multiple SVGs/images and generate a professional grid/collage with either:
+
+**A. A customizable solid grid background**
+
+or
+
+**B. A customizable border around every individual SVG/image element**
+
+with all colors directly controlled by the user and **White (#FFFFFF) as the default grid background color**.
