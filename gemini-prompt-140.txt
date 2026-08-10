@@ -1,0 +1,80 @@
+## SVG Recolor → Batch Preset Renderer – Custom Color Picker
+
+In the **SVG Recolor → Batch Preset Renderer** section, update both the **Grid Background Color** and **SVG Element Border Color** controls.
+
+### Required Implementation
+
+Keep **all existing predefined colors exactly as they are** in both color selections:
+
+1. **Grid Background Color**
+2. **SVG Element Border Color**
+
+Do not remove, replace, rename, or modify any of the existing colors.
+
+In addition to the existing color options, add a **Custom Color Picker** option to both controls.
+
+### Custom Color Picker Requirements
+
+The user must be able to:
+
+* Open a standard color picker.
+* Select **any custom color** from the full color spectrum.
+* Enter a specific color code manually.
+* Support **HEX color codes**, such as `#FF5733`.
+* Display the currently selected custom color clearly.
+* Apply the selected custom color immediately to the corresponding output.
+
+### Grid Background Color
+
+The **Grid Background Color** control should contain:
+
+**Existing predefined colors + Custom Color Picker**
+
+If the user selects a predefined color, use that color.
+
+If the user selects a custom color, apply the exact custom color to the **entire collage/grid background**.
+
+### SVG Element Border Color
+
+The **SVG Element Border Color** control should contain:
+
+**Existing predefined colors + Custom Color Picker**
+
+If the user selects a predefined color, use that color.
+
+If the user selects a custom color, apply the exact custom color as the **border color for every SVG/image element in the generated grid**.
+
+### Important
+
+The two custom color selections must remain **completely independent**.
+
+For example:
+
+* Grid Background Color → Custom `#F3E8FF`
+* SVG Element Border Color → Custom `#7C3AED`
+
+Both colors must be applied exactly as selected.
+
+### Preserve Existing Functionality
+
+Do not change the existing:
+
+* Predefined color list
+* Color names
+* Grid generation
+* Batch upload functionality
+* SVG rendering
+* Grid spacing
+* SVG element borders
+* Artwork dimensions
+* Existing default colors
+
+Only add the **custom color picker and color-code input capability**.
+
+### Expected Result
+
+Both **Grid Background Color** and **SVG Element Border Color** should provide:
+
+**All existing predefined colors + Custom Color Picker + Manual HEX color-code input**
+
+This gives the user complete control to select either an existing color or **any custom color they need** for the generated SVG collage/grid.
