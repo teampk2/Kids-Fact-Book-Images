@@ -1,0 +1,313 @@
+## Facts Book PDF – Fix KDP Font Embedding Error
+
+After generating the final **Facts Book PDF**, when the PDF is uploaded to the **Amazon KDP website**, KDP displays this warning:
+
+> **“Fonts are not properly embedded in your file. We've embedded them for you, but this might slightly change your book’s appearance. Please check that your book still looks as intended.”**
+
+Fix the PDF generation and export logic so that **all fonts used anywhere in the entire book are properly embedded in the final PDF before the PDF is downloaded/uploaded to KDP**.
+
+### Required Implementation
+
+Do not simply ignore the KDP warning or rely on KDP to embed the fonts automatically.
+
+The PDF generation pipeline must explicitly handle font embedding:
+
+```text
+Full Book Manuscript
+        ↓
+Collect all fonts used in the entire book
+        ↓
+Load the actual font files
+        ↓
+Verify font licensing/embedding permission
+        ↓
+Register fonts with the PDF renderer
+        ↓
+Generate PDF using embedded fonts
+        ↓
+Subset/embed required font data
+        ↓
+Finalize PDF
+        ↓
+Run automatic font-embedding validation
+        ↓
+PASS
+        ↓
+Export final KDP-ready PDF
+```
+
+---
+
+## 1. Embed Every Font Used in the Book
+
+The system must identify **every font used throughout the entire PDF**, including fonts used for:
+
+* Fact titles
+* Fact text
+* **“How it works:”** text
+* **“Think about it:”** text
+* Chapter headings
+* Section headings
+* Cover/interior headings
+* Page headers
+* Page numbers
+* Certificates
+* Tables
+* Quiz pages
+* Instructions
+* Copyright pages
+* Any other generated text
+
+Do not embed only the primary/default font.
+
+If multiple fonts are used, **every required font must be embedded**.
+
+---
+
+## 2. Do Not Use System-Font References
+
+Do not generate the PDF using references such as:
+
+```text
+Arial
+Times New Roman
+system-ui
+sans-serif
+```
+
+and assume the PDF renderer will automatically embed them.
+
+Instead, map every font used by the book to its actual font file and register that font with the PDF generation engine.
+
+For example:
+
+```text
+Font Family
+    ↓
+Regular font file
+Bold font file
+Italic font file
+Bold Italic font file
+    ↓
+Register with PDF engine
+    ↓
+Use registered embedded font
+```
+
+---
+
+## 3. Correct Font Variant Handling
+
+Make sure every required font variant is separately handled.
+
+For example:
+
+* Regular
+* Bold
+* Italic
+* Bold Italic
+
+If **“Think about it”** uses italic text, the actual italic font variant must be embedded rather than artificially slanting or substituting another font.
+
+If a heading uses bold, use the correctly registered bold font file.
+
+---
+
+## 4. Prevent Font Substitution
+
+The PDF generation system must not silently substitute another font because the requested font was not registered.
+
+Add validation such as:
+
+```text
+Requested Font
+      ↓
+Is Font Registered?
+      ↓
+YES → Use Embedded Font
+      ↓
+NO
+      ↓
+Stop PDF generation
+      ↓
+Show clear font configuration error
+```
+
+Do **not** silently fall back to another font.
+
+This is important because font substitution can change:
+
+* Text width
+* Line wrapping
+* Line breaks
+* Fact Box height
+* Page layout
+* Alignment
+* Pagination
+* Overall appearance
+
+---
+
+## 5. Preserve the Existing Book Design
+
+Fix font embedding **without changing the current visual design**.
+
+Preserve:
+
+* Existing font family
+* Font sizes
+* Bold/italic styles
+* Text colors
+* Line heights
+* Letter spacing
+* Paragraph spacing
+* Fact Box dimensions
+* Margins
+* Page layout
+* Pagination
+* Alignment
+* Overall typography
+
+The goal is:
+
+**Same appearance + properly embedded fonts.**
+
+Do not solve the problem by replacing all fonts with a different font unless the current font is technically impossible to embed.
+
+---
+
+## 6. Handle Font Subsetting Correctly
+
+If the PDF library uses font subsetting, ensure the subset is valid and fully embedded.
+
+The final PDF should contain the required embedded font data for every font used.
+
+Do not create a PDF that merely contains a font name/reference without the actual embedded font data.
+
+---
+
+## 7. Add a Final PDF Font Validation Step
+
+Before allowing the user to download the final PDF, automatically inspect the generated PDF.
+
+The validation should check:
+
+### Every page
+
+* Identify fonts used.
+* Confirm each font is embedded.
+* Confirm there are no missing font resources.
+* Confirm there are no unintended font substitutions.
+
+### Validation logic
+
+```text
+Generate PDF
+     ↓
+Scan PDF font resources
+     ↓
+For each font:
+     ↓
+Is font embedded?
+     ├── YES → PASS
+     └── NO  → FAIL
+              ↓
+       Do not export final PDF
+              ↓
+       Fix/rebuild PDF
+```
+
+The final PDF should not be marked **KDP Ready** until this validation passes.
+
+---
+
+## 8. Detect Common PDF Font Problems
+
+The validation should detect and prevent:
+
+* Unembedded fonts
+* Partially embedded fonts
+* Missing font subsets
+* Font substitution
+* Missing italic/bold variants
+* Type 3 fonts where an embedded standard font is expected
+* Broken font resources
+* Missing glyphs
+* Incorrect Unicode font mapping
+* Fonts referenced externally instead of embedded
+
+---
+
+## 9. Verify Special Characters and Unicode
+
+Because the Facts Book may contain special characters, punctuation, symbols, and other Unicode characters, make sure the embedded fonts contain all glyphs required by the manuscript.
+
+Do not replace unsupported characters with incorrect symbols.
+
+The generated PDF should preserve the original text exactly.
+
+---
+
+## 10. Final KDP Preflight
+
+Add a final **KDP PDF Preflight** before download.
+
+The preflight should check at minimum:
+
+```text
+✓ All fonts embedded
+✓ No missing fonts
+✓ No unintended font substitution
+✓ All required glyphs available
+✓ Text remains selectable/searchable
+✓ Font resources are valid
+✓ Page dimensions correct
+✓ No text clipping
+✓ No layout changes caused by font substitution
+✓ PDF successfully generated
+```
+
+If font validation fails, show a clear message such as:
+
+**“PDF export stopped: One or more fonts are not properly embedded. Please fix the font configuration before generating the KDP-ready PDF.”**
+
+Do not allow an invalid PDF to be presented as the final KDP-ready file.
+
+---
+
+# Critical Requirement
+
+The final PDF must be generated with **properly embedded fonts from the beginning**, rather than allowing KDP to embed them after upload.
+
+The objective is to eliminate the KDP warning:
+
+> **“Fonts are not properly embedded in your file.”**
+
+The exported PDF should already contain the necessary embedded font resources so that **KDP does not need to modify or embed the fonts itself**.
+
+### Final Workflow
+
+```text
+Generate Full Book Manuscript
+          ↓
+Load actual font files
+          ↓
+Register all font families + variants
+          ↓
+Generate PDF
+          ↓
+Embed/subset fonts
+          ↓
+Validate every PDF font resource
+          ↓
+Validate glyphs
+          ↓
+Validate text rendering
+          ↓
+Validate page layout
+          ↓
+If PASS → Export KDP-ready PDF
+If FAIL → Automatically correct/rebuild PDF
+```
+
+**Do not merely suppress the KDP warning. Fix the underlying PDF font-embedding problem in the PDF generation/export code.**
