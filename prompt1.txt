@@ -1,322 +1,193 @@
-# AI Coding Clarification Prompt: Kids Facts Web App — Multi-Book Manuscript Creation, Saving, and Generation Workflow
+## SVG Recolor → Batch Preset Renderer – UI and Dynamic Grid Background Improvements
 
-## 1. Saved Manuscript Library System
+Implement the following **two changes** in the:
 
-After the user completes and finalizes a full manuscript book:
+**SVG Recolor → Batch Preset Renderer**
 
-* Automatically save the complete manuscript inside the **"Saved Manuscript Library"**.
-
-The saved manuscript must preserve all settings and data, including:
-
-* Complete PDF manuscript
-* Book title
-* Book number / volume number
-* Page structure
-* Layout design
-* Grid positions
-* Fact placements
-* Images
-* Image prompts
-* Typography settings
-* Design settings
-* Non-fact pages
-* User selections
-* Generation settings
-
-The user must be able to:
-
-* Reopen the saved manuscript anytime.
-* Edit the manuscript.
-* Continue working from the exact saved state without losing any settings.
+section.
 
 ---
 
-# 2. Add "Create New Book" Feature
+# 1. Add “Each Image Element Grid Background Color”
 
-Add a permanent **"Create New Book"** option inside the Kids Facts web app.
+Add a new option named:
 
-This option must work:
+### **Each Image Element Grid Background Color**
 
-* For first-time users creating Book 01.
-* For users who already completed previous books and want to create the next volume.
+This option must automatically determine the most suitable **grid/cell background color for each individual image element** based on the actual colors contained in that image/SVG.
 
-The system must support creating unlimited books.
+### Required Logic
 
-Example:
+The system must analyze each individual image/SVG element and automatically select a background color that provides **clear visual separation and strong contrast** with that specific element.
 
-* Book 01
-* Book 02
-* Book 03
-* Book 04
-* Future volumes
+The background color must be selected **independently for every image element**.
 
----
+For example:
 
-# 3. New Book Layout Preservation System
+* **Dark image/SVG element → Light or appropriately contrasting grid background**
+* **Light image/SVG element → Dark or appropriately contrasting grid background**
+* **Medium-tone element → Select a suitable contrasting medium/light/dark background**
+* **Very light element → Select a sufficiently dark background so the artwork remains clearly visible**
+* **Very dark element → Select a sufficiently light background so the artwork remains clearly visible**
 
-Whenever a new book is created:
+### Important
 
-The new book must follow the exact same structure and design of the previous finalized book.
+Do **not** use a simple fixed rule such as:
 
-Maintain:
+```text
+Dark → White
+Light → Black
+```
 
-* Same page size
-* Same layout
-* Same design style
-* Same grid arrangement
-* Same fact locations
-* Same image positions
-* Same spacing
-* Same alignment
+Instead, analyze the actual dominant/representative colors of each individual image element and select the **best visually contrasting background color**.
 
-Important:
-
-The new facts must appear in the exact same positions where the previous book facts appeared.
-
-Example:
-
-If a fact was placed:
-
-* Grid 01
-* Top section
-* Left text area
-* Right image area
-
-Then the new book must place the new fact in the same location.
+The goal is to make every image element clearly visible.
 
 ---
 
-# 4. 31 Grid Fact Replacement System
+### Automatic Contrast Logic
 
-The book contains:
+For each image element:
 
-**31 Fact Grids**
+```text
+Analyze Image/SVG Colors
+        ↓
+Determine Dominant / Representative Color
+        ↓
+Calculate Relative Brightness / Luminance
+        ↓
+Determine Suitable Contrast Range
+        ↓
+Select Best Grid Background Color
+        ↓
+Apply Only to That Image Element's Grid Cell
+```
 
-For every new book:
+The selected background must not overpower the artwork.
 
-* Generate a fresh set of facts for all 31 grids.
-* Replace previous book facts.
-* Keep the same grid structure.
+### Example
 
-Requirements:
+If an SVG contains predominantly:
 
-* Grid locations remain unchanged.
-* Grid design remains unchanged.
-* Only the fact content changes.
+* **Very dark artwork** → use a light background.
+* **Very light artwork** → use a dark background.
+* **Pink/red artwork** → choose a contrasting background that keeps the artwork clearly visible.
+* **Blue artwork** → choose a background with sufficient tonal/color contrast.
+* **Mixed colors** → analyze the overall visual composition and choose the background that provides the best overall visibility.
 
-Every new volume must contain:
+### Per-Element Requirement
 
-* New facts
-* New content
-* Unique information
+Do **not** apply one background color to the entire collage.
 
----
+Each grid cell must be evaluated independently:
 
-# 5. Dummy Fact Preview Workflow
+```text
+Image 1 → Background Color A
+Image 2 → Background Color B
+Image 3 → Background Color C
+Image 4 → Background Color D
+...
+```
 
-The new book creation workflow should work similar to the existing PDF proof generation process.
+The background color may repeat between elements **only when the same color is genuinely the best contrast choice**. Do not force unnecessary color variation.
 
-When a new book starts:
+### Visual Quality
 
-* Display the standard book layout.
-* Load dummy fact content into the fact pages.
-* Keep the 31 grid structure ready.
-* Maintain the same preview state.
+The automatically selected background must:
 
-The dummy facts should remain visible until:
+* Clearly separate the artwork from the background.
+* Maintain strong contrast.
+* Avoid making light artwork disappear.
+* Avoid making dark artwork disappear.
+* Avoid visually clashing with the artwork.
+* Keep the original image/SVG unchanged.
+* Not recolor, modify, or distort the actual artwork.
+* Use a clean **solid background color**.
+* Avoid gradients, patterns, textures, or unnecessary effects.
 
-User clicks:
+### User Control
 
-**"Compile & Generate PDF Booklet"**
+Add this as a selectable option in:
 
----
+**SVG Recolor → Batch Preset Renderer**
 
-# 6. Compile & Generate PDF Booklet Process
+The user should be able to enable:
 
-When the user clicks:
+**☑ Each Image Element Grid Background Color**
 
-**"Compile & Generate PDF Booklet"**
-
-The system must:
-
-1. Remove dummy facts.
-2. Insert the actual generated facts.
-3. Apply the user's selected:
-
-   * Number of facts
-   * Number of pages
-   * Book settings
-
-Then:
-
-* Assign the correct unique facts to the 31 grids.
-* Apply the matching user-uploaded images.
-* Generate the final manuscript PDF.
-
-This process must work for:
-
-* Book 01
-* Book 02
-* Book 03
-* All future books
+When enabled, the application automatically calculates the best background color for each individual grid element.
 
 ---
 
-# 7. Fresh Facts on Every "Create New Book"
+# 2. Make “Choose Preset Selection Mode” Visible by Default
 
-Every time the user clicks:
+In:
 
-**"Create New Book"**
+**SVG Recolor → Batch Preset Renderer → Collage & Layout Options**
 
-The system must:
+there is currently an option:
 
-* Generate a new set of facts for all 31 grids.
-* Create a new book generation cycle.
-* Start with fresh dummy facts.
-* Prepare the next manuscript volume.
+### **Choose Preset Selection Mode**
 
-The previous book's facts must not automatically appear in the new book.
+The current UI requires the user to click a **down-arrow/expand control** before the option becomes visible.
 
----
+Change this behavior.
 
-# 8. Unique Fact Management System
+### Required UI Behavior
 
-Implement a fact tracking system.
+**“Choose Preset Selection Mode” must be fully visible by default.**
 
-Before generating a new book:
+The user should **not have to click the down arrow** to see or access this option.
 
-Check previously created books.
+The control should be expanded automatically when the **Collage & Layout Options** section is displayed.
 
-Rules:
+### Important
 
-* Do not reuse old facts.
-* Do not duplicate previous facts.
-* Each volume must contain completely unique facts.
+* Remove the requirement to click the down arrow just to reveal this option.
+* Keep the existing functionality unchanged.
+* Keep all existing preset-selection controls available.
+* Do not hide the selection mode by default.
+* The user must immediately see the available preset selection options.
 
-Maintain:
+### If the Expand/Collapse Arrow Is Retained
 
-* Fact history
-* Used fact records
-* Book-wise fact database
+If the existing UI design requires an expand/collapse arrow, the section should still **start in the expanded state by default**.
 
----
+For example:
 
-# 9. Preserving Original Non-Fact Pages
+```text
+Collage & Layout Options
+────────────────────────────────
 
-Review and maintain the protected non-fact pages:
+Choose Preset Selection Mode
+○ Option A
+○ Option B
+○ Option C
+...
+```
 
-1. **WELCOME TO WONDER!**
-
-2. **HOW TO USE THIS BOOK**
-
-3. **SUPER MASTER CERTIFICATE BADGE**
-
-4. **THANK YOU FOR EXPLORING!**
-
-5. **MORE FUN BOOKS FROM DREAM ORBIT**
-
-For all books:
-
-* Keep these pages unchanged.
-* Preserve the original design.
-* Preserve text.
-* Preserve layout.
-* Preserve images.
-* Preserve formatting.
-
-These pages must remain consistent across:
-
-* Book 01
-* Book 02
-* Book 03
-* All future volumes
+The user can still collapse the section if desired, but **the initial/default state must be expanded and fully visible**.
 
 ---
 
-# 10. Multi-Volume Book Architecture
+## Final Expected Result
 
-The system must be designed for continuous book creation.
+Under:
 
-Each book represents:
+**SVG Recolor → Batch Preset Renderer**
 
-* One independent volume.
+implement both changes:
 
-The system must maintain:
+### Feature 1
 
-* Same professional series design.
-* Same page structure.
-* Same protected pages.
-* New unique facts.
-* New images.
-* New prompts.
+**Each Image Element Grid Background Color**
 
-Every generated volume should look like part of the same book series.
+→ Automatically analyzes each image/SVG and selects the most suitable contrasting solid background for its individual grid cell.
 
----
+### Feature 2
 
-# 11. Image Prompt Regeneration System
+**Choose Preset Selection Mode**
 
-Whenever a new book is created:
+→ Immediately visible by default inside **Collage & Layout Options**, without requiring the user to click the down arrow first.
 
-The image prompts connected with facts must also be regenerated.
-
-Requirements:
-
-* Previous book image prompts must not be reused.
-* Generate new prompts based on the new facts.
-* Replace old prompts with new relevant prompts.
-
-The new image prompts must follow:
-
-* Same generation style.
-* Same quality standard.
-* Same illustration format.
-* Same design approach as previous books.
-
----
-
-# 12. Final PDF Generation and Mega Sync Notification
-
-After:
-
-* Final manuscript PDF generation completes.
-* File is successfully synced to the Mega account.
-
-Implement:
-
-A clear and distinct audible notification sound.
-
-Purpose:
-
-Notify the user that:
-
-* PDF generation completed.
-* Sync completed successfully.
-* Final manuscript is ready.
-
-The notification must be:
-
-* Clearly audible.
-* Reliable.
-* Triggered only after successful Mega synchronization.
-
----
-
-# Final Expected System Behavior
-
-The complete workflow should be:
-
-1. User creates or opens a book.
-2. Manuscript is saved in Saved Manuscript Library.
-3. User clicks "Create New Book".
-4. New volume starts with same design/layout.
-5. Dummy facts appear for preview.
-6. New unique 31-grid facts are prepared.
-7. User clicks "Compile & Generate PDF Booklet".
-8. Dummy facts are replaced with real facts.
-9. New images and prompts are applied.
-10. Final PDF is generated.
-11. PDF is synced to Mega.
-12. Completion sound plays.
-
-This workflow must work consistently for unlimited future books.
+Both changes must work correctly without affecting the existing SVG recoloring, batch processing, collage generation, or export functionality.
