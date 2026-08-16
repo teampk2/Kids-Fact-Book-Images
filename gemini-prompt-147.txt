@@ -1,0 +1,295 @@
+# Image Discovery Facts (31 Image Facts) — Prompt Export, Category Mapping & SVG Icon Logic
+
+In the **“Image Discovery Facts (31 Image Facts)”** section, use the **Excel file uploaded by the user** as the source of truth for the 31 Grid Facts.
+
+The application must correctly connect each Grid Fact with its image-generation prompt, metadata, category, and category-specific SVG icon.
+
+## 1. 31 Grid Fact Data Source
+
+For each of the 31 Grid Facts, read the corresponding information from the user's uploaded Excel file.
+
+Each Grid Fact must retain its correct:
+
+* Image Number
+* LEVEL Number
+* Fact Slot Number
+* Fact Title
+* Fact Content
+* Image Category
+* AI Illustration Generator Prompt
+
+Do not generate or substitute unrelated data from the Built-in AI-Generated Database when the uploaded Excel file is the selected source.
+
+---
+
+# 2. Add Category to Every Image Prompt Record
+
+The **“Export Prompts to Excel”** function must be updated.
+
+Currently, the export contains the image-generation prompts related to the 31 facts. From now on, the exported Excel must additionally contain the **category assigned to each fact**.
+
+For every one of the 31 records, export:
+
+| Image Number | LEVEL Number | Fact Slot Number | AI ILLUSTRATION GENERATOR PROMPT | Category |
+| ------------ | ------------ | ---------------- | -------------------------------- | -------- |
+
+### Required Fields
+
+**Image Number**
+The exact image number from the 31 Grid data.
+
+**LEVEL Number**
+The exact level number associated with that fact.
+
+**Fact Slot Number**
+The exact fact-slot number associated with that fact.
+
+**AI ILLUSTRATION GENERATOR PROMPT**
+The complete image-generation prompt associated with that specific fact.
+
+**Category**
+The correctly assigned category from the approved 26-category list below.
+
+Do not omit any of these five fields.
+
+---
+
+# 3. Approved 26 Categories
+
+The **Category** field must use only one of these exact category names:
+
+1. Animals
+2. Art
+3. Birds
+4. Culture
+5. Dinosaurs
+6. Food
+7. General Knowledge
+8. Geography
+9. History
+10. Human Body
+11. Insects
+12. Inventions
+13. Language
+14. Mathematics
+15. Music
+16. Nature
+17. Ocean Life
+18. Plants
+19. Science
+20. Space
+21. Sports
+22. Technology
+23. Transportation
+24. Weather
+25. World Facts
+26. World Records
+
+Use the category names **exactly as written**. Do not create alternative spellings, abbreviations, or additional categories.
+
+---
+
+# 4. Category Must Be Determined From the Actual Fact
+
+The category must be assigned by reading and understanding the **complete fact**, not by image number, level, slot number, row order, or a fixed sequence.
+
+The system should determine the **primary educational subject** of the fact and assign the best matching category.
+
+For example:
+
+```text
+Axolotl fact
+→ Animals
+
+Dinosaur fact
+→ Dinosaurs
+
+Planet / galaxy fact
+→ Space
+
+Human organ fact
+→ Human Body
+
+Ocean animal / marine ecosystem fact
+→ Ocean Life
+
+Weather phenomenon
+→ Weather
+```
+
+If a fact could fit multiple categories, select the category representing the **main subject of the fact**.
+
+---
+
+# 5. Bulk SVG Icons Upload (Fact Pages)
+
+In the **“Bulk SVG Icons Upload (Fact Pages)”** section, the user will upload the 26 category icons.
+
+The uploaded icon filenames should use the **exact category names** as their default category identifiers.
+
+For example:
+
+```text
+Animals.svg
+Art.svg
+Birds.svg
+Culture.svg
+Dinosaurs.svg
+...
+World Records.svg
+```
+
+The application must automatically recognize the category from the icon filename/category name.
+
+---
+
+# 6. Automatic Category → SVG Icon Mapping
+
+After the category is assigned to each of the 31 Grid Facts:
+
+```text
+Fact
+ ↓
+Determine Category
+ ↓
+Category Name
+ ↓
+Find Same-Named SVG Icon
+ ↓
+Attach Icon to Fact
+ ↓
+Place Icon Before Title
+```
+
+Example:
+
+```text
+Fact Category = Animals
+        ↓
+Find "Animals" SVG
+        ↓
+Use Animals icon
+        ↓
+Place immediately before title
+```
+
+Another example:
+
+```text
+Fact Category = Space
+        ↓
+Find "Space" SVG
+        ↓
+Use Space icon
+        ↓
+Place immediately before title
+```
+
+The system must **not randomly select an icon**.
+
+---
+
+# 7. Apply Icons Only to the 31 Grid Facts
+
+The category-specific icon mapping must be applied **only to the 31 Image Discovery Facts / 31 Grid Facts**.
+
+Do not automatically replace or alter icons elsewhere in the book.
+
+For each of the 31 facts:
+
+**Category → matching category SVG → icon immediately before title**
+
+---
+
+# 8. Preserve the Existing 31 Grid Layout
+
+Do not change the existing Grid design.
+
+Preserve:
+
+* Fact title
+* Fact content
+* Grid position
+* Typography
+* Colors
+* Spacing
+* Image placement
+* Fact Box dimensions
+* Overall layout
+
+Only add/use the correct category icon immediately before each title.
+
+---
+
+# 9. Export and Icon Data Must Stay Synchronized
+
+The category written into **Export Prompts to Excel** must be the same category used to select the SVG icon.
+
+For example:
+
+```text id="a3x9p1"
+Excel Export:
+Category = Animals
+
+        ↓
+
+Bulk SVG Icon Mapping:
+Animals.svg
+
+        ↓
+
+31 Grid:
+Animals.svg + Fact Title
+```
+
+There must be **one consistent source of truth** for the category.
+
+Do not allow the Excel export to show one category while the Grid uses an unrelated icon category.
+
+---
+
+# 10. Validation Before Export and PDF Generation
+
+Before generating the Excel export or 31-Grid PDF, validate every record:
+
+```text id="rj5m22"
+For each of 31 facts:
+    ↓
+Image Number present?
+LEVEL Number present?
+Fact Slot Number present?
+Prompt present?
+Category present?
+    ↓
+Category belongs to approved 26 categories?
+    ↓
+Matching SVG icon exists?
+    ↓
+Icon filename/category matches exactly?
+    ↓
+Icon assigned immediately before title?
+    ↓
+PASS
+```
+
+If the category and icon do not match, do not silently use another icon.
+
+Fix the mapping before finalizing the Grid or PDF.
+
+---
+
+# Final Expected Result
+
+The **Image Discovery Facts (31 Image Facts)** workflow must now operate as one connected system:
+
+**User Excel → 31 Facts → Image Number + LEVEL Number + Fact Slot Number + AI Illustration Prompt + Category → Export Prompts to Excel**
+
+and simultaneously:
+
+**Category → Same-Named SVG Icon → Icon Before Title → 31 Grid Facts → PDF Output**
+
+The **“Export Prompts to Excel”** file must contain all five required fields:
+
+**Image Number | LEVEL Number | Fact Slot Number | AI ILLUSTRATION GENERATOR PROMPT | Category**
+
+and the **31 Grid Facts** must automatically display the **matching category icon from “Bulk SVG Icons Upload (Fact Pages)” immediately before each fact title**, using the exact 26 approved category names.
