@@ -1,0 +1,175 @@
+## Kids Facts Book — Fix Dynamic Index Generation for Every New Book
+
+The **Index section is not working correctly**.
+
+Currently, when the first book is created, the app generates an index from that book's content. However, when the user later creates a **new book**, the application keeps the **old Book 1 index** instead of generating a new index from the new book.
+
+This must be fixed at the **book-data and index-generation logic level**.
+
+### Required Implementation
+
+Every newly created book must have its **own completely independent interior content and index data**.
+
+When a new book is created:
+
+1. Create a new book-specific data/state instance.
+2. Store the complete interior content for that new book separately.
+3. Do not copy or reuse the previous book's index.
+4. Do not reuse cached index entries or page mappings from any earlier book.
+5. Read only the complete interior content belonging to the current book.
+6. Generate a completely new index from that content.
+7. Store the generated index only inside the current book's data.
+8. Ensure the previous book's index remains attached only to the previous book.
+
+### Required Data Separation
+
+Use strict book-level isolation:
+
+```text
+Book 1
+├── Interior Content
+├── Page Data
+└── Index Data
+
+Book 2
+├── Interior Content
+├── Page Data
+└── Index Data
+
+Book 3
+├── Interior Content
+├── Page Data
+└── Index Data
+```
+
+The application must never use:
+
+```text
+Book 1 Index → Book 2
+Book 2 Index → Book 3
+```
+
+unless the user explicitly loads that specific older book.
+
+### New Book Index Workflow
+
+For every new book:
+
+```text
+Create New Book
+      ↓
+Initialize NEW book ID/state
+      ↓
+Generate complete NEW interior
+      ↓
+Store NEW book's complete pages/content
+      ↓
+Finalize page numbering
+      ↓
+Read ONLY current book's stored interior
+      ↓
+Identify indexable content
+      ↓
+Generate NEW index
+      ↓
+Validate index against current book
+      ↓
+Attach index to CURRENT book only
+      ↓
+Generate final PDF
+```
+
+### Critical Cache/State Fix
+
+Remove any global or shared index state that can cause an old index to remain active.
+
+Check and fix:
+
+* Global `indexData`
+* Shared manuscript state
+* Cached page mappings
+* Previous-book references
+* Persistent local storage keys
+* React state reused between books
+* Memoized index data
+* Static index arrays
+* Old PDF/manuscript references
+
+Use a **unique book ID / volume ID** for all manuscript, page, and index data.
+
+For example:
+
+```text
+bookId = volume-1
+indexKey = index-volume-1
+
+bookId = volume-2
+indexKey = index-volume-2
+```
+
+### Complete Content Read Requirement
+
+Every time a new book is created, the index generator must read the **entire interior content of that new book**, not just the first few pages or a predefined fact list.
+
+It must use the current book's:
+
+* Fact titles
+* Fact content
+* Categories
+* Sections
+* Levels
+* Special pages
+* Any other indexable subjects
+
+Then generate the index from those actual contents.
+
+### Page Number Requirement
+
+Index page numbers must come from the **final page numbering of the current book**.
+
+Do not reuse page numbers from the previous book.
+
+If the layout changes after the index is inserted, recalculate page numbers and rebuild the index again.
+
+### Final Validation
+
+Before exporting the PDF, verify:
+
+```text
+Current Book ID
+      ↓
+Current Interior Content
+      ↓
+Current Page Numbers
+      ↓
+Current Index Entries
+```
+
+For every index entry:
+
+* The subject exists in the current book.
+* The referenced page belongs to the current book.
+* The page number matches the current final PDF.
+* No entry comes from an older book.
+
+### Expected Result
+
+When the user creates **Book 1**:
+
+**Book 1 content → Book 1 index**
+
+When the user creates **Book 2**:
+
+**Book 2 content → NEW Book 2 index**
+
+When the user creates **Book 3**:
+
+**Book 3 content → NEW Book 3 index**
+
+The old book's index must **never appear in a newly created book**.
+
+### Critical Requirement
+
+**Every new book must start with a fresh, isolated index-generation process based only on that book's complete interior content.**
+
+Do not simply replace the visible index text. Fix the underlying data architecture so that **old book content, old index data, old page mappings, and cached index state cannot leak into any newly created book**.
