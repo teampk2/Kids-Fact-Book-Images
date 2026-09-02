@@ -1,0 +1,52 @@
+I have completed the final **Kids Facts Book PDF manuscript** and uploaded it to the **Amazon KDP website**, but KDP has rejected the interior because of a **bleed and margin issue**.
+
+Please carefully study the attached KDP error screenshot and fix **this exact KDP issue** throughout the entire manuscript.
+
+### KDP Error to Fix
+
+KDP reports:
+
+**“Your file contains insufficient bleed.”**
+
+The affected example pages identified by KDP are:
+
+**Pages 1–4, 6–8, and 114–115.**
+
+However, do **not** fix only these pages. Review the **entire PDF page by page** and correct the same issue wherever it occurs.
+
+### Required Fix
+
+For an **8.5 × 11 inch interior with bleed**:
+
+* Increase the PDF page dimensions correctly for bleed.
+* Add **0.125 inch (3.2 mm) bleed** to the left/right sides and **0.25 inch (6.4 mm) total** to the page height, following KDP's requirement.
+* Any background, image, illustration, or graphic intended to reach the trim edge must extend completely through the bleed area.
+* Prevent unintended white gaps from appearing after trimming.
+* Keep all non-bleed text and important elements at least **0.375 inch (9.5 mm) from the outside edges**, as required by KDP.
+* Keep all important text, headings, icons, fact content, borders, and essential artwork inside the safe area.
+* Do not crop or distort illustrations when extending them into the bleed.
+* Maintain the existing page design, content, typography, illustrations, and overall visual structure.
+
+### Critical Requirement
+
+Do not simply enlarge the canvas. The actual **backgrounds and edge-reaching artwork must extend into the bleed area** wherever required.
+
+Also check for:
+
+* Text too close to trim
+* Images ending at the trim line
+* Backgrounds not reaching the bleed
+* White strips/gaps at page edges
+* Elements accidentally crossing the safe margin
+* Incorrect page dimensions
+* Inconsistent bleed between pages
+
+### Final Quality Control
+
+After correction, inspect **every page of the complete Kids Facts Book PDF**, not just the pages listed by KDP.
+
+Verify:
+
+**Correct 8.5 × 11 trim size → Correct bleed dimensions → 0.125-inch bleed → 0.375-inch outside safe margin → No white edge gaps → No clipped content → No overflow → No distorted artwork → KDP-ready interior.**
+
+Then generate the **fully corrected PDF manuscript** and make it ready for **re-upload to KDP**.
