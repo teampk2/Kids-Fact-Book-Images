@@ -26,6 +26,7 @@ For an **8.5 × 11 inch interior with bleed**:
 * Keep all important text, headings, icons, fact content, borders, and essential artwork inside the safe area.
 * Do not crop or distort illustrations when extending them into the bleed.
 * Maintain the existing page design, content, typography, illustrations, and overall visual structure.
+* Adjust the PDF page dimensions correctly to account for bleed time look at to ensure the 1000 fact boxes and inner text fit perfectly and dont overflow to margins; make sure the fact boxes do not touch the page borders.
 
 ### Critical Requirement
 
