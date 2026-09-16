@@ -1,0 +1,26 @@
+Issue: Inner White Parts Turn Solid Black Instead of Being Removed
+Location:
+"Single Preset Renderer" section — specifically the newly implemented "Remove Inner White Parts" feature.
+
+Current Behavior (Bug):
+With the code implemented earlier, when a user uploads an SVG file and the feature is applied, the internal white parts and white elements inside the SVG are turning solid black instead of being removed. This is incorrect behavior — the white elements should be fully removed (become transparent or eliminated), not converted to black.
+
+Expected Behavior:
+When the option is enabled, all white parts and white elements inside the uploaded SVG file must be completely removed — meaning they should become transparent or disappear — not converted into black or any other color. All non-white elements, colors, and design integrity must remain untouched and preserved.
+
+Reference:
+Two screenshots are attached for clarity:
+
+Original uploaded SVG — showing "Background White" (outer area) and "Inner White Part" (white shapes inside the artwork).
+
+Result after processing — showing the inner white parts incorrectly rendered as solid black instead of being removed.
+
+Fix Required:
+
+Detect and remove all white parts and white elements inside the SVG (fills, strokes, shapes, paths, groups).
+
+Ensure removed white elements become transparent or eliminated — not converted to black.
+
+Preserve all non-white elements, colors, and design integrity.
+
+Ensure the fix works independently and in combination with the existing "Remove Background" option.
