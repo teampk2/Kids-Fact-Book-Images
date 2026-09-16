@@ -1,24 +1,27 @@
-Issue: Entire Image Turns Black When "Remove Inner White Parts" Is Enabled
+Issue: "Remove Inner White Parts" — Same Bug Repeated Without Fix
 Location:
-"Single Preset Renderer" section — specifically the "Remove Inner White Parts" option.
+"Single Preset Renderer" → "Remove Inner White Parts" option.
 
-Current Behavior (Bug):
-Regarding the code implemented earlier, when the user enables the "Remove Inner White Parts" option and uploads an SVG file, the internal white parts do not simply disappear as intended. Instead, the entire image turns black, and the layer shapes also become black — meaning the removal logic is incorrectly affecting the whole artwork rather than only the targeted white elements.
+Status:
+❌ Repeatedly reported — still NOT fixed.
 
-Expected Behavior:
-When the option is enabled, only the specific internal white parts and white elements (or any other specifically targeted colors) should be removed — meaning they should become transparent or disappear. The rest of the image, including all other colors, layers, shapes, and design elements, must remain completely untouched and preserved. The entire image must not turn black, and no other elements should be affected.
+Problem Statement:
+This is the same problem repeating continually without any rectification or fix. When the user enables the "Remove Inner White Parts" option and uploads an SVG file, the entire image turns black, and the layer shapes also become black — instead of only removing the targeted internal white parts.
 
-Fix Required:
+Instruction to Developer:
+Use your mind. Take this seriously. The same bug has been reported multiple times and remains unresolved. If you do not already know the fix, search the entire internet/web to find the correct solution and implement it properly. Do not return another incomplete fix. The issue must be fully resolved this time.
 
-Ensure the removal logic targets only the specified internal white parts and elements (or the specific targeted color).
+Correct Behavior Required:
 
-Removed elements must become transparent or eliminated — not converted to black.
+Only the specific internal white parts and elements (or other specifically targeted colors) should be removed — becoming transparent or eliminated.
 
-The entire image must never turn black or lose its original colors.
+The entire image must NEVER turn black.
 
-All non-targeted elements, layers, shapes, and colors must remain fully intact and unchanged.
+Layer shapes must NEVER turn black.
 
-Ensure the fix works correctly both independently and in combination with the existing "Remove Background" option.
+All other elements, layers, shapes, and colors must remain fully intact and unchanged.
+
+The fix must work correctly both independently and alongside the existing "Remove Background" option.
 
 Reference:
-See the attached screenshots — original uploaded image and result image after processing — showing the current incorrect behavior where the entire image and layer shapes turn black.
+Attached screenshots show the original uploaded image and the result image after processing — clearly showing the entire image and layer shapes turning black.
